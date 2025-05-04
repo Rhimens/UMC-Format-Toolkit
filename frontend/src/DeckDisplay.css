@@ -1,0 +1,51 @@
+.deck-builder-layout {
+  display: flex;
+  gap: 0px;
+  padding: 0px;
+}
+
+.deck-section,
+.violations-section,
+.banlist-section {
+  flex: 1;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  overflow-y: auto;
+  max-height: 80vh;
+}
+
+.deck-section ul,
+.violations-section ul,
+.banlist-section ul {
+  text-align: left;
+  list-style-type: disc;
+  padding-left: 1.5rem; /* add indentation for clarity */
+}
+
+.banlist-section li {
+  margin-bottom: 0.25rem;
+}
+
+
+.card-type {
+  font-size: 0.85em;
+  color: #666;
+}
+.app-container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 20px; /* optional: space between columns */
+}
+
+/* Optional: sizing for each column */
+.left-column {
+  flex: 1;
+}
+
+.right-column {
+  flex: 3.35;
+
+}

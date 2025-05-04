@@ -1,0 +1,147 @@
+{
+    "forbidden": [
+        "Chaos Emperor Dragon - Envoy of the End",
+        "Fiber Jar",
+        "Tribe-Infecting Virus",
+        "Yata-Garasu",
+        "Confiscation",
+        "Delinquent Duo",
+        "Giant Trunade",
+        "Harpie's Feather Duster",
+        "Raigeki",
+        "Reversal Quiz",
+        "The Forceful Sentry",
+        "Exchange of the Spirit",
+        "Fairy Box",
+        "Imperial Order",
+        "Last Turn",
+        "Pole Position",
+        "Royal Decree",
+        "Royal Oppression",
+        "Sixth Sense",
+        "Trap Dustshoot",
+        "Wall of Revealing Light",
+        "The Last Warrior from Another Planet"
+    ],
+  
+    "limited": [
+        "Amazoness Archer",
+        "Breaker the Magical Warrior",
+        "Cannon Soldier",
+        "Catapult Turtle",
+        "D.D. Assailant",
+        "D.D. Warrior",
+        "D.D. Warrior Lady",
+        "Dandylion",
+        "Magician of Faith",
+        "Morphing Jar",
+        "Night Assailant",
+        "Spirit Reaper",
+        "Tsukuyomi",
+        "Limiter Removal",
+        "Premature Burial",
+        "Reinforcement of the Army",
+        "Solemn Judgment",
+        "Cyber Twin Dragon",
+        "Five-Headed Dragon",
+        "Left Leg of The Forbidden One",
+        "Right Leg of The Forbidden One",
+        "Left Arm of The Forbidden One",
+        "Right Arm of The Forbidden One",
+        "Exodia The Forbidden One"
+],
+  
+    "semi_limited": [
+        "Cyber Dragon",
+        "Exiled Force",
+        "Spirit Reaper",
+        "Butterfly Dagger - Elma",
+        "Card Destruction",
+        "Creature Swap",
+        "Level Limit - Area B",
+        "Nobleman of Crossout",
+        "Magical Stone Excavation",
+        "Metamorphosis",
+        "Mystical Space Typhoon",
+        "Pot of Avarice",
+        "Scapegoat",
+        "Soul Taker",
+        "Swords of Revealing Light",
+        "Upstart Goblin",
+        "Wave-Motion Cannon",
+        "Call of the Haunted",
+        "Deck Devastation Virus",
+        "Gravity Bind",
+        "Dark Balter the Terrible",
+        "Fiend Skull Dragon",
+        "Ryu Senshi"
+    ],
+  
+    "restricted": [
+        "Black Luster Soldier - Envoy of the Beginning",
+        "Magical Scientist",
+        "Makyura the Destructor",
+        "Cold Wave",
+        "Dark Hole",
+        "Graceful Charity",
+        "Heavy Storm",
+        "Mirage of Nightmare",
+        "Painful Choice",
+        "Pot of Greed",
+        "Crush Card Virus"
+    ],
+  
+    "soft_restricted": [
+        "Chaos Sorcerer",
+        "Cyber Jar",
+        "Cyber-Stein",
+        "Dark Magician of Chaos",
+        "Jinzo",
+        "Marshmallon",
+        "Rescue Cat",
+        "Sangan",
+        "Sinister Serpent",
+        "Toon Cannon Soldier",
+        "Treeborn Frog",
+        "Witch of the Black Forest",
+        "Change of Heart",
+        "Dimension Fusion",
+        "Last Will",
+        "Mass Driver",
+        "Monster Reborn",
+        "Snatch Steal",
+        "Temple of the Kings",
+        "Malevolent Catastrophe",
+        "Mirror Force",
+        "Return from the Different Dimension",
+        "Ring of Destruction",
+        "Torrential Tribute",
+        "Thousand-Eyes Restrict"
+        
+    ],
+  
+    "combo_ban": [
+      ["Cyber-Stein", "Cyber Twin Dragon"],
+      ["Cyber-Stein", "Cyber End Dragon"],
+      ["Makyura the Destructor", "Dark Scorpion - Chick the Yellow", "Call of the Haunted"],
+      ["Gearfried the Iron Knight", "Butterfly Dagger - Elma"],
+      ["Magical Scientist", "Catapult Turtle"],
+      ["Magical Scientist", "Deck Devastation Virus"],
+      ["Temple of the Kings", "Blasting the Ruins"],
+      ["Temple of the Kings", "Magical Explosion"]
+    ],
+  
+    "combo_limited": [
+        ["Dark Magician of Chaos", "Monster Gate"],
+        ["Dark Magician of Chaos", "Reasoning"],
+        ["Mage Power", "United We Stand"],
+        ["Temple of the Kings", "Reckless Greed"]
+    ],
+  
+    "synergy_limited": [
+        ["Zaborg the Thunder Monarch", "Mobius the Frost Monarch", "Thestalos the Firestorm Monarch"],
+        ["Level Limit - Area B", "Messenger of Peace", "Gravity Bind"],
+        ["Nobleman of Crossout", "Soul Taker", "Smashing Ground","Bottomless Trap Hole"]
+    ]
+  }
+  
