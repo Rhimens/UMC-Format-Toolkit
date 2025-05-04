@@ -1,12 +1,6 @@
-# React + Vite
+# Ultimate Masters Curated Format Deck Toolkit
+https://docs.google.com/document/d/17LDnfdMO5JJ79qBHyATulJdkU9vjUWRAE7t_iKyKB4M/edit?tab=t.0
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+This toolkit allows for easier deckbuilding in the Ultimate Masters Curated format.
+The card pool is precise and includes all overlaps between Ultimate Masters 2006 and Reaper Format.
+The banlist (which has several twists on regular Yu-Gi-Oh deckbuilding) is available to view in the toolkit, and also will notify you if any of your deckbuilding choices are in violation of the list.
