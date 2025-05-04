@@ -19,6 +19,7 @@
         "Royal Decree",
         "Royal Oppression",
         "Sixth Sense",
+        "Tornado Wall",
         "Trap Dustshoot",
         "Wall of Revealing Light",
         "The Last Warrior from Another Planet"
@@ -117,9 +118,10 @@
         "Ring of Destruction",
         "Torrential Tribute",
         "Thousand-Eyes Restrict"
+        
     ],
   
-    "combo_banned": [
+    "combo_ban": [
       ["Cyber-Stein", "Cyber Twin Dragon"],
       ["Cyber-Stein", "Cyber End Dragon"],
       ["Makyura the Destructor", "Dark Scorpion - Chick the Yellow", "Call of the Haunted"],

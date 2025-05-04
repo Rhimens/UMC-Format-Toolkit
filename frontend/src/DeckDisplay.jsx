@@ -29,6 +29,8 @@ const banlistCategoryDisplay = {
     combo_ban: "Combo Banned",
     combo_limited: "Combo Limited",
     synergy_limited: "Synergy Limited",
+    restricted: "Restricted",
+    soft_restricted: "Soft Restricted"
   };  
 
   const banlistCategoryStyles = {
@@ -38,6 +40,8 @@ const banlistCategoryDisplay = {
     combo_ban: { color: "purple" },
     combo_limited: { color: "teal" },
     synergy_limited: { color: "blue" },
+    restricted: { color: "blue" },
+    soft_restricted: { color: "blue" },
   };
   
 
@@ -56,7 +60,7 @@ export default function DeckDisplay({ deck = [] }) {
         <h2>Ban List</h2>
         <p><strong>{activeBanlist?.name || "UMC | March 3, 2025"}</strong></p>
 
-            {["forbidden", "limited", "semi_limited", "combo_ban", "combo_limited", "synergy_limited"].map((category) =>
+            {["forbidden", "limited", "semi_limited", "combo_ban", "combo_limited", "synergy_limited", "restricted", "soft_restricted"].map((category) =>
             activeBanlist?.[category]?.length > 0 ? (
             <div key={category} style={{ marginBottom: '1rem' }}>
                 <h4 style={{ fontWeight: 'bold', ...(banlistCategoryStyles[category] || {}) }}>
