@@ -10,6 +10,21 @@ function CardList() {
   const [sideDeck, setSideDeck] = useState([]); 
   const [banViolations, setBanViolations] = useState({});
 
+  const [searchFields, setSearchFields] = useState({
+    name: true,
+    text: true,
+    genre: true
+  });
+
+  const toggleSearchField = (field) => {
+    setSearchFields(prev => ({
+      ...prev,
+      [field]: !prev[field]
+    }));
+  };
+  
+  
+
   const violationRules = {
     forbidden: 'This card is Forbidden and cannot be included in any deck.',
     limited: 'This card is Limited (max. 1 copy).',
@@ -259,12 +274,18 @@ function CardList() {
   const violatingNames = getViolatingCardNames();
 
   const filteredCards = cards.filter(card => {
-    const name = card.full_data?.text?.en?.name?.toLowerCase?.() || '';
+    const name = card.full_data?.text?.en?.name?.toLowerCase() || '';
+    const text = card.full_data?.text?.en?.effect?.toLowerCase() || '';
     const genres = card.genres?.map(g => g.toLowerCase()) || [];
     const query = cardSearch.toLowerCase();
-
-    return name.includes(query) || genres.some(g => g.includes(query));
+  
+    return (
+      (searchFields.name && name.includes(query)) ||
+      (searchFields.text && text.includes(query)) ||
+      (searchFields.genre && genres.some(g => g.includes(query)))
+    );
   });
+  
 
   const mainDeck = sortDeckCards(deck.filter(card => {
     const types = card.full_data.monsterCardTypes?.map(t => t.toLowerCase()) || [];
@@ -464,13 +485,39 @@ function CardList() {
 
   {/* RIGHT: Card Search */}
   <div className="w-1/2 overflow-y-auto">
-    <input
-      type="text"
-      placeholder="Search by name or genre..."
-      value={cardSearch}
-      onChange={(e) => setCardSearch(e.target.value)}
-      className="w-full mb-4 p-2 border border-gray-300 rounded"
-    />
+    <div className="flex gap-4 mb-4 items-center">
+  <input
+    type="text"
+    value={cardSearch}
+    onChange={e => setCardSearch(e.target.value)}
+    placeholder="Search cards..."
+    className="border px-2 py-1 rounded w-full"
+  />
+  <div className="flex gap-2 items-center">
+    <label>
+      <input
+        type="checkbox"
+        checked={searchFields.name}
+        onChange={() => toggleSearchField('name')}
+      /> Name
+    </label>
+    <label>
+      <input
+        type="checkbox"
+        checked={searchFields.text}
+        onChange={() => toggleSearchField('text')}
+      /> Text
+    </label>
+    <label>
+      <input
+        type="checkbox"
+        checked={searchFields.genre}
+        onChange={() => toggleSearchField('genre')}
+      /> Genre
+    </label>
+  </div>
+</div>
+
     <div className="grid grid-cols-3 gap-2">
         {filteredCards.map((card) => (
           <div key={card.uuid} className="bg-white p-2 rounded shadow-md flex flex-col items-center">
