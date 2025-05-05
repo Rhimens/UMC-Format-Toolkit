@@ -9,6 +9,8 @@ function CardList() {
   const [deck, setDeck] = useState([]); 
   const [sideDeck, setSideDeck] = useState([]); 
   const [banViolations, setBanViolations] = useState({});
+  const [excludeNormals, setExcludeNormals] = useState(false);
+
 
   const [searchFields, setSearchFields] = useState({
     name: true,
@@ -21,10 +23,29 @@ function CardList() {
       ...prev,
       [field]: !prev[field]
     }));
-  };
-  
-  
+  };  
 
+// Dummy list to safelist Tailwind classes (not rendered)
+const tailwindSafelist = [
+  'border-red-500',
+  'border-gray-300',
+  // Add other expected genre colors here
+];
+
+  const genreColors = {
+    'UMC Errata': 'border-purple-700 border-4',
+  };
+
+  function getGenreColors(card) {
+    const genres = card.genres || card.full_data?.genres || [];
+    for (const genre of genres) {
+      if (genreColors[genre]) {
+        return genreColors[genre];
+      }
+    }
+    return 'border-gray-300';
+  }
+  
   const violationRules = {
     forbidden: 'This card is Forbidden and cannot be included in any deck.',
     limited: 'This card is Limited (max. 1 copy).',
@@ -113,7 +134,7 @@ function CardList() {
       synergy_limited: [],
       restricted: [],
       soft_restricted: [],
-      combo_banned: [],
+      combo_ban: [],
       deck_limit: [],
       extra_limit: [],
       side_limit: [],
@@ -195,11 +216,11 @@ function CardList() {
       violations.soft_restricted.push(`${presentSoftRestricted.join(' + ')} (${totalSoftRestrictedCount})`);
     }
 
-    banlist.combo_banned?.forEach(combo => {
+    banlist.combo_ban?.forEach(combo => {
       const lowerNames = deck.map(card => card.full_data?.text?.en?.name?.toLowerCase?.() || '');
       const normalizedCombo = combo.map(name => name.toLowerCase());
       if (normalizedCombo.every(name => lowerNames.includes(name))) {
-        violations.combo_banned.push(combo.join(' + '));
+        violations.combo_ban.push(combo.join(' + '));
       }
     });
 
@@ -279,12 +300,18 @@ function CardList() {
     const genres = card.genres?.map(g => g.toLowerCase()) || [];
     const query = cardSearch.toLowerCase();
   
+    const isNormalMonster =
+      (card.full_data.classifications || []).some(t => t.toLowerCase() === 'normal');
+  
+    if (excludeNormals && isNormalMonster) return false;
+  
     return (
       (searchFields.name && name.includes(query)) ||
       (searchFields.text && text.includes(query)) ||
       (searchFields.genre && genres.some(g => g.includes(query)))
     );
   });
+  
   
 
   const mainDeck = sortDeckCards(deck.filter(card => {
@@ -408,16 +435,14 @@ function CardList() {
           <div
             key={`${card.uuid}-${Math.random()}`}
             onClick={() => removeFromDeck(card)}
-            className={`cursor-pointer border-2 rounded hover:border-red-500 transition ${isViolation ? 'border-red-600' : 'border-blue-300'}`}
-          >
+            className={`cursor-pointer border-2 rounded hover:border-red-500 transition ${isViolation ? 'border-red-600' : 'border-blue-300'}`}>
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 addToSideDeck(card);
                 removeFromDeck(card)
               }}
-              className="mt-2 text-xs bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600"
-            >
+              className="mt-2 text-xs bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600">
               Move to Side
             </button>
             <img
@@ -515,46 +540,57 @@ function CardList() {
         onChange={() => toggleSearchField('genre')}
       /> Genre
     </label>
+    <label>
+      <input
+        type="checkbox"
+        checked={excludeNormals}
+        onChange={() => setExcludeNormals(prev => !prev)}
+        className="mr-2"
+      />
+      Exclude Normal Monsters
+    </label>
+
   </div>
 </div>
 
-    <div className="grid grid-cols-3 gap-2">
-        {filteredCards.map((card) => (
-          <div key={card.uuid} className="bg-white p-2 rounded shadow-md flex flex-col items-center">
-            <div className="w-full max-w-[120px] aspect-[3/4] overflow-hidden cursor-pointer">
-              <img
-                src={card.full_data.images?.[0]?.card}
-                alt={card.full_data?.text?.en?.name || 'Card'}
-                className="w-full h-full object-contain"
-                onClick={() => setOpenCardId(openCardId === card.uuid ? null : card.uuid)}
-              />
-            </div>
-            <p className="text-xs text-center mt-2">{card.full_data?.text?.en?.name || 'Unnamed Card'}</p>
-            <button
-              onClick={() => addToDeck(card)}
-              className="mt-2 text-xs bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600"
-            >
-              Add to Deck
-            </button>
-            {openCardId === card.uuid && (
-              <div className="mt-2 text-xs text-left w-full">
-                {card.genres?.length > 0 ? (
-                  <ul className="list-disc pl-4 mb-2">
-                    {card.genres.map((genre, i) => (
-                      <li key={i}>{genre}</li>
-                    ))}
-                  </ul>
-                ) : (
-                  <div className="mb-2">No genres</div>
-                )}
-                <div className="italic">
-                  {card.full_data.text?.en?.effect || 'No effect text available.'}
-                </div>
-              </div>
-            )}
-          </div>
-        ))}
+<div className="grid grid-cols-3 gap-2">
+  {filteredCards.map((card) => (
+    <div key={card.uuid} className={`bg-white p-2 rounded shadow-md flex flex-col items-center border-2 ${getGenreColors(card)}`}>
+      <div className="w-full max-w-[120px] aspect-[3/4] overflow-hidden cursor-pointer">
+        <img
+          src={card.full_data.images?.[0]?.card}
+          alt={card.full_data?.text?.en?.name || 'Card'}
+          className="w-full h-full object-contain"
+          onClick={() => setOpenCardId(openCardId === card.uuid ? null : card.uuid)}
+        />
       </div>
+      <p className="text-xs text-center mt-2">{card.full_data?.text?.en?.name || 'Unnamed Card'}</p>
+      <button
+        onClick={() => addToDeck(card)}
+        className="mt-2 text-xs bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600"
+      >
+        Add to Deck
+      </button>
+      {openCardId === card.uuid && (
+        <div className="mt-2 text-xs text-left w-full">
+          {card.genres?.length > 0 ? (
+            <ul className="list-disc pl-4 mb-2">
+              {card.genres.map((genre, i) => (
+                <li key={i}>{genre}</li>
+              ))}
+            </ul>
+          ) : (
+            <div className="mb-2">No genres</div>
+          )}
+          <div className="italic">
+            {card.full_data.text?.en?.effect || 'No effect text available.'}
+          </div>
+        </div>
+      )}
+    </div>
+  ))}
+</div>
+
   </div>
 </div>
   );

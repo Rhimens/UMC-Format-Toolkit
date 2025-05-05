@@ -25,7 +25,7 @@ const banlistCategoryDisplay = {
   forbidden: "Forbidden",
   limited: "Limited",
   semi_limited: "Semi-Limited",
-  combo_banned: "Combo Banned",
+  combo_ban: "Combo Banned",
   combo_limited: "Combo Limited",
   synergy_limited: "Synergy Limited",
   restricted: "Restricted",
@@ -36,7 +36,7 @@ const banlistCategoryStyles = {
   forbidden: { color: "red" },
   limited: { color: "orange" },
   semi_limited: { color: "goldenrod" },
-  combo_banned: { color: "purple" },
+  combo_ban: { color: "purple" },
   combo_limited: { color: "teal" },
   synergy_limited: { color: "blue" },
   restricted: { color: "blue" },
@@ -60,7 +60,7 @@ export default function DeckDisplay({ deck = [] }) {
     for (const [key, label] of Object.entries(banlistCategoryDisplay)) {
       const entries = activeBanlist[key] || [];
 
-      if (key === "combo_banned" || key === "combo_limited" || key === "synergy_limited") {
+      if (key === "combo_ban" || key === "combo_limited" || key === "synergy_limited") {
         entries.forEach(group => {
           group.forEach(id => {
             tags[id] = label;
@@ -80,6 +80,9 @@ export default function DeckDisplay({ deck = [] }) {
     <div className="deck-builder-layout">
 
       {/* Left column: Deck cards with tags */}
+      <div className="deck-card-section">
+      </div>
+
       {/* Right column: Banlist display */}
       <div className="banlist-section">
         <h2>Ban List</h2>
