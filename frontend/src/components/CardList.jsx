@@ -32,19 +32,43 @@ const tailwindSafelist = [
   // Add other expected genre colors here
 ];
 
-  const genreColors = {
-    'UMC Errata': 'border-purple-700 border-4',
-  };
+const genreColors = {
+  'UMC Errata': 'border-purple-700 border-4',
+};
 
-  function getGenreColors(card) {
-    const genres = card.genres || card.full_data?.genres || [];
-    for (const genre of genres) {
-      if (genreColors[genre]) {
-        return genreColors[genre];
-      }
+const umcBorders = {
+  "Forbidden": "border-red-600 border-4",
+  "Limited": "border-yellow-500 border-4",
+  "Semi-Limited": "border-yellow-300 border-4",
+  "Restricted": "border-blue-600 border-4",
+  "Soft Restricted": "border-blue-300 border-4",
+  "Combo Banned": "border-purple-600 border-4",
+  "Combo Limited": "border-purple-300 border-4",
+  "Synergy Limited": "border-green-400 border-4",      
+  "Unlimited": "border-gray-400 border-2",
+};
+
+function getUMCLegalClass(card) {
+  const umc = card?.legality?.UMC;
+  console.log(`UMC for ${card.full_data?.text?.en?.name ?? card.uuid}: "${umc}"`);
+  return umcBorders[umc] || null;
+}
+
+
+
+function getGenreBorderClass(card) {
+  const genres = card.genres || card.full_data?.genres || [];
+  for (const genre of genres) {
+    if (genreColors[genre]) {
+      return genreColors[genre];
     }
-    return 'border-gray-300';
   }
+  return null;
+}
+
+function getBorderClass(card) {
+  return getUMCLegalClass(card) || getGenreBorderClass(card) || 'border-gray-300';
+}
   
   const violationRules = {
     forbidden: 'This card is Forbidden and cannot be included in any deck.',
@@ -555,7 +579,7 @@ const tailwindSafelist = [
 
 <div className="grid grid-cols-3 gap-2">
   {filteredCards.map((card) => (
-    <div key={card.uuid} className={`bg-white p-2 rounded shadow-md flex flex-col items-center border-2 ${getGenreColors(card)}`}>
+    <div key={card.uuid} className={`bg-white p-2 rounded shadow-md flex flex-col items-center border-2 ${getBorderClass(card)}`}>
       <div className="w-full max-w-[120px] aspect-[3/4] overflow-hidden cursor-pointer">
         <img
           src={card.full_data.images?.[0]?.card}
